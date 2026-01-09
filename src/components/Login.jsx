@@ -138,7 +138,7 @@ function Login({ onLoginSuccess }) {
         <div className="login-container">
             <div className="login-card fade-in">
                 <div className="login-header">
-                    <span className="login-icon">🏨</span>
+                    <span className="login-icon">🏠</span>
                     <h1>宿泊料金計算ツール</h1>
                     <p className="login-subtitle">
                         {isFirstTime ? 'パスワードを設定してください' : 'ログイン'}

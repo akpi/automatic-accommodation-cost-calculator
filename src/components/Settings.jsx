@@ -153,7 +153,7 @@ function Settings({ selectedHotelId, onHotelChange, onNavigateBack, onLogout }) 
                 {/* ホテル選択 */}
                 <div className="card fade-in">
                     <div className="card-header">
-                        <span className="icon">🏨</span>
+                        <span className="icon">🏠</span>
                         <span>ホテル選択</span>
                     </div>
                     <select

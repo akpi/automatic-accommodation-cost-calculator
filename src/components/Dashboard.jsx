@@ -100,7 +100,7 @@ function Dashboard({ selectedHotelId, onHotelChange, onNavigateToSettings }) {
             <div className="container">
                 {/* ヘッダー */}
                 <header className="dashboard-header">
-                    <h1 className="dashboard-title">🏨 宿泊料金計算ツール</h1>
+                    <h1 className="dashboard-title">🏠 宿泊料金計算ツール</h1>
                     <div className="hotel-selector">
                         <select
                             value={selectedHotelId}
