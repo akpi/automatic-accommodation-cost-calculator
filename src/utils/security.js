@@ -64,6 +64,7 @@ export function recordLoginFailure() {
     const current = getLoginAttempts();
     const newAttempts = current.attempts + 1;
 
+
     let lockoutUntil = null;
     let isLocked = false;
 
