@@ -159,6 +159,52 @@ export function saveDayuseData(hotelId, data) {
 }
 
 /**
+ * デイユースデータをIDベースでマージ（重複は上書き、新規は追加）
+ * @param {string} hotelId - ホテルID
+ * @param {Array} newData - 新しいデータ配列（各要素にidプロパティ必須）
+ * @returns {Object} { added: number, updated: number, total: number }
+ */
+export function mergeDayuseData(hotelId, newData) {
+    const existingData = getDayuseData(hotelId);
+
+    // 既存データをIDでマップ化
+    const dataMap = new Map();
+    existingData.forEach(item => {
+        if (item.id) {
+            dataMap.set(item.id, item);
+        }
+    });
+
+    let added = 0;
+    let updated = 0;
+
+    // 新しいデータをマージ
+    newData.forEach(item => {
+        if (!item.id) return; // IDがない場合はスキップ
+
+        if (dataMap.has(item.id)) {
+            // 既存データを上書き
+            dataMap.set(item.id, { ...dataMap.get(item.id), ...item });
+            updated++;
+        } else {
+            // 新規データを追加
+            dataMap.set(item.id, item);
+            added++;
+        }
+    });
+
+    // マップを配列に変換して保存
+    const mergedData = Array.from(dataMap.values());
+    saveDayuseData(hotelId, mergedData);
+
+    return {
+        added,
+        updated,
+        total: mergedData.length,
+    };
+}
+
+/**
  * デイユースデータを追加
  * @param {string} hotelId - ホテルID
  * @param {Array} newData - 追加するデータ配列

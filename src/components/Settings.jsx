@@ -4,7 +4,7 @@ import {
     getMonthlyTarget,
     saveMonthlyTarget,
     getDayuseDataCount,
-    saveDayuseData,
+    mergeDayuseData,
     clearDayuseData,
     getPasswordHash,
     savePasswordHash,
@@ -107,11 +107,16 @@ function Settings({ selectedHotelId, onHotelChange, onNavigateBack, onLogout }) 
         setConfirmPassword('');
     };
 
-    // CSVアップロード完了
+    // CSVアップロード完了（IDベースでマージ）
+    const [uploadResult, setUploadResult] = useState(null);
+
     const handleUploadComplete = (data) => {
-        saveDayuseData(selectedHotelId, data);
-        setDataCount(data.length);
+        const result = mergeDayuseData(selectedHotelId, data);
+        setDataCount(result.total);
+        setUploadResult(result);
         setShowUploader(false);
+        // 3秒後に結果をクリア
+        setTimeout(() => setUploadResult(null), 5000);
     };
 
     // データ削除
@@ -200,6 +205,12 @@ function Settings({ selectedHotelId, onHotelChange, onNavigateBack, onLogout }) 
                         <span>現在のデータ</span>
                         <span className="data-count">{formatNumber(dataCount)}件</span>
                     </div>
+
+                    {uploadResult && (
+                        <div className="upload-result">
+                            ✅ アップロード完了：追加 {uploadResult.added}件、更新 {uploadResult.updated}件
+                        </div>
+                    )}
 
                     <div className="data-actions">
                         <button

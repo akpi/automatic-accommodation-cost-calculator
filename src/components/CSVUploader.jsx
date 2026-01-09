@@ -5,7 +5,7 @@ import './CSVUploader.css';
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 // 必須列
-const REQUIRED_COLUMNS = ['date', 'price'];
+const REQUIRED_COLUMNS = ['id', 'date', 'price'];
 
 /**
  * CSVアップローダーコンポーネント
@@ -251,8 +251,9 @@ function CSVUploader({ onUploadComplete, onCancel }) {
                     {/* CSV形式の説明 */}
                     <div className="csv-format-hint">
                         <h4>CSV形式</h4>
-                        <code>date,duration_minutes,price,check_in,check_out</code>
-                        <p>必須列: date, price</p>
+                        <code>id,date,duration_minutes,price,check_in,check_out</code>
+                        <p>必須列: id, date, price</p>
+                        <p className="merge-hint">※ 同一IDは上書き、新規IDは追加されます</p>
                     </div>
                 </div>
 

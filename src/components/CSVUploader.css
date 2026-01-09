@@ -178,3 +178,8 @@
     font-size: var(--font-size-xs);
     color: var(--color-text-muted);
 }
+
+.csv-format-hint .merge-hint {
+    color: var(--color-success);
+    font-weight: 500;
+}
